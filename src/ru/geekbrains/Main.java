@@ -19,7 +19,11 @@ public class Main {
 
     public static char DOT_HUMAN, DOT_AI;
 
+<<<<<<< HEAD
     public static char[][] map = new char[SIZE][SIZE];;
+=======
+    public static char[][] map = new char[SIZE][SIZE];
+>>>>>>> bbf1376... Небольшие потуги в сторону AI.
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -124,12 +128,53 @@ public class Main {
     }
 
     private static void aiTurn() {
+<<<<<<< HEAD
+=======
+        boolean flagCritical = false;
+        int criticalRow = -1;
+        int criticalColumn = -1;
+>>>>>>> bbf1376... Небольшие потуги в сторону AI.
         System.out.println("Ход компьютера.");
         int rowNumber, colNumber;
         Random random = new Random();
         do {
+<<<<<<< HEAD
             rowNumber = random.nextInt(SIZE) + 1;
             colNumber = random.nextInt(SIZE) + 1;
+=======
+            // Компьютер выполняет проверку символов в строке, если количество символов меньше размера поля на один, что
+            // говорит о том что следующим ходом человек победит фиксирует эту строку и ставит в нее свой символ
+            for (int i = 0; i < SIZE; i++) {
+                if (checkRow(i, DOT_HUMAN) == SIZE - 1) {
+                    flagCritical = true;
+                    criticalRow = i;
+                    break;
+                }
+            }
+            if (flagCritical) {
+                rowNumber = criticalRow;
+            } else {
+                rowNumber = random.nextInt(SIZE) + 1;
+            }
+
+            // Компьютер выполняет проверку символов в колонке, если количество символов меньше размера поля на один, что
+            // говорит о том что следующим ходом человек победит фиксирует эту колонку и ставит в нее свой символ на свободное место
+            for (int i = 0; i < SIZE; i++) {
+                if (checkColumn(i, DOT_HUMAN) == SIZE - 1) {
+                    flagCritical = true;
+                    criticalColumn = i;
+                    break;
+                }
+            }
+            if (flagCritical) {
+                colNumber = criticalColumn;
+            } else {
+                colNumber = random.nextInt(SIZE) + 1;
+            }
+
+            // Аналогичным образом надо проверить диагонали
+
+>>>>>>> bbf1376... Небольшие потуги в сторону AI.
         } while (map[rowNumber - 1][colNumber - 1] != DOT_EMPTY);
         map[rowNumber - 1][colNumber - 1] = DOT_AI;
     }
@@ -156,11 +201,69 @@ public class Main {
     }
 
     private static boolean checkWin(char[][] map, char simbol) {
+<<<<<<< HEAD
 
         //
         return false;
     }
 
+=======
+        boolean flagWin = false;
+        // Сравниаем значение симолов в колонках и строках и на диагоналях с размером матрицы
+        for (int i = 0; i < SIZE; i++) {
+            if (SIZE == checkRow(i, simbol)) flagWin = true;
+        }
+        for (int j = 0; j < SIZE; j++) {
+            if (SIZE == checkColumn(j, simbol)) flagWin = true;
+        }
+        if (SIZE == checkMainDiagonal(simbol) && SIZE == checkBackDiagonal(simbol)) flagWin = true;
+
+        return flagWin;
+    }
+
+    private static int checkColumn(int columnNumber, char simbol) {
+        int count = 0;
+        char vremChar;
+        for (int i = 0; i < SIZE; i++) {
+            vremChar = map[i][columnNumber];
+            if (simbol == vremChar) count++;
+        }
+        return count;
+    }
+
+    //
+    private static int checkRow(int rowNumber, char simbol) {
+        int count = 0;
+        char vremChar;
+        for (int i = 0; i < SIZE; i++) {
+            vremChar = map[rowNumber][i];
+            if (simbol == vremChar) count++;
+        }
+        return count;
+    }
+
+    private static int checkMainDiagonal(char simbol) {
+        int count = 0;
+        char vremChar;
+        for (int i = 0; i < SIZE; i++) {
+            vremChar = map[i][i];
+            if (simbol == vremChar) count++;
+        }
+        return count;
+    }
+
+    private static int checkBackDiagonal(char simbol) {
+        int count = 0;
+        char vremChar;
+        for (int i = 0; i < SIZE; i++) {
+            vremChar = map[i][SIZE - i - 1];
+            if (simbol == vremChar) count++;
+        }
+        return count;
+    }
+
+
+>>>>>>> bbf1376... Небольшие потуги в сторону AI.
     private static boolean isMapFilled(char[][] map) {
 
         for (char[] chars : map) {
