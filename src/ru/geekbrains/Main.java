@@ -19,11 +19,8 @@ public class Main {
 
     public static char DOT_HUMAN, DOT_AI;
 
-<<<<<<< HEAD
-    public static char[][] map = new char[SIZE][SIZE];;
-=======
     public static char[][] map = new char[SIZE][SIZE];
->>>>>>> bbf1376... Небольшие потуги в сторону AI.
+
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -128,20 +125,13 @@ public class Main {
     }
 
     private static void aiTurn() {
-<<<<<<< HEAD
-=======
         boolean flagCritical = false;
         int criticalRow = -1;
         int criticalColumn = -1;
->>>>>>> bbf1376... Небольшие потуги в сторону AI.
         System.out.println("Ход компьютера.");
         int rowNumber, colNumber;
         Random random = new Random();
         do {
-<<<<<<< HEAD
-            rowNumber = random.nextInt(SIZE) + 1;
-            colNumber = random.nextInt(SIZE) + 1;
-=======
             // Компьютер выполняет проверку символов в строке, если количество символов меньше размера поля на один, что
             // говорит о том что следующим ходом человек победит фиксирует эту строку и ставит в нее свой символ
             for (int i = 0; i < SIZE; i++) {
@@ -174,7 +164,6 @@ public class Main {
 
             // Аналогичным образом надо проверить диагонали
 
->>>>>>> bbf1376... Небольшие потуги в сторону AI.
         } while (map[rowNumber - 1][colNumber - 1] != DOT_EMPTY);
         map[rowNumber - 1][colNumber - 1] = DOT_AI;
     }
@@ -201,13 +190,7 @@ public class Main {
     }
 
     private static boolean checkWin(char[][] map, char simbol) {
-<<<<<<< HEAD
 
-        //
-        return false;
-    }
-
-=======
         boolean flagWin = false;
         // Сравниаем значение симолов в колонках и строках и на диагоналях с размером матрицы
         for (int i = 0; i < SIZE; i++) {
@@ -262,8 +245,6 @@ public class Main {
         return count;
     }
 
-
->>>>>>> bbf1376... Небольшие потуги в сторону AI.
     private static boolean isMapFilled(char[][] map) {
 
         for (char[] chars : map) {
