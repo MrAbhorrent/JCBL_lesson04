@@ -9,9 +9,9 @@ public class Main {
     // variable size if matrix
     public static final int SIZE = 3;
 
-    public static final String WelcomeMessage = "Давайте сыграем в крестики нолики";
-    public static final String SelectSimbol = "Выберете каким символом вы будете играть";
-    public static final String ErrorSelectSimbol = "Неправильно введены символы. Необходимо ввести 1 или 2";
+    public static final String welcomeMessage = "Давайте сыграем в крестики нолики";
+    public static final String selectSymbol = "Выберете каким символом вы будете играть";
+    public static final String errorSelectSymbol = "Неправильно введены символы. Необходимо ввести 1 или 2";
 
     public static final char DOT_EMPTY = '•';
     public static final char DOT_PLAYER1 = '+';
@@ -25,20 +25,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println(WelcomeMessage);
-        selectPlayerSimbol();
+        System.out.println(welcomeMessage);
+        selectPlayerSymbol();
         initializeMap(map, SIZE);
         printMap(map);
-
         playGame();
-
     }
 
-    private static void selectPlayerSimbol() {
-        System.out.println(SelectSimbol + ":\n1. " + DOT_PLAYER1 + "\n2. " + DOT_PLAYER2);
+    private static void selectPlayerSymbol() {
+        System.out.println(selectSymbol + ":\n1. " + DOT_PLAYER1 + "\n2. " + DOT_PLAYER2);
 
         int selectPlayer;
-        boolean checkCorrectSelectionSimbol = false;
+        boolean checkCorrectSelectionSymbol = false;
         do {
             try {
                 selectPlayer = scanner.nextInt();
@@ -46,20 +44,20 @@ public class Main {
                     case 1:
                         DOT_HUMAN = DOT_PLAYER1;
                         DOT_AI = DOT_PLAYER2;
-                        checkCorrectSelectionSimbol = true;
+                        checkCorrectSelectionSymbol = true;
                         break;
                     case 2:
                         DOT_HUMAN = DOT_PLAYER2;
                         DOT_AI = DOT_PLAYER1;
-                        checkCorrectSelectionSimbol = true;
+                        checkCorrectSelectionSymbol = true;
                         break;
                     default:
-                        System.out.println(ErrorSelectSimbol);
+                        System.out.println(errorSelectSymbol);
                 }
             } catch (NumberFormatException ex) {
-                System.out.println(ErrorSelectSimbol);
+                System.out.println(errorSelectSymbol);
             }
-        } while (!checkCorrectSelectionSimbol);
+        } while (!checkCorrectSelectionSymbol);
         //scanner.close();
     }
 
@@ -71,8 +69,9 @@ public class Main {
 
     private static void printMap(char[][] map) {
         System.out.printf("%3c", ' ');
-        for (int i = 0; i < map.length; i++)
-            System.out.printf("%3d", i+1);
+        for (int i = 0; i < map.length; i++) {
+            System.out.printf("%3d", i + 1);
+        }
         System.out.println();
         for (int i = 0; i < map.length; i++) {
             System.out.printf("%3d", i + 1);
@@ -86,20 +85,17 @@ public class Main {
         String BaseStr = "Введите номер ";
         System.out.println("Ваш ход.");
         int rowNumber, colNumber;
-
         do {
             System.out.print(BaseStr + "строки: ");
             rowNumber = scanner.nextInt();
             System.out.print(BaseStr + "колонки: ");
             colNumber = scanner.nextInt();
-
-            //scanner.close();
         } while (!isCellValid(rowNumber, colNumber));
         map[rowNumber - 1][colNumber - 1] = DOT_HUMAN;
     }
 
     private static boolean isCellValid(int rowNumber, int colNumber) {
-        
+
         if ((rowNumber < 1) || (rowNumber > SIZE) || (colNumber < 1) || (colNumber > SIZE)) {
             System.out.println("Некорректно введены значения строки или столбца. Попробуйте снова");
             return false;
@@ -192,7 +188,7 @@ public class Main {
     private static boolean checkWin(char[][] map, char simbol) {
 
         boolean flagWin = false;
-        // Сравниаем значение симолов в колонках и строках и на диагоналях с размером матрицы
+        // Сравниваем значение символов в колонках и строках и на диагоналях с размером матрицы
         for (int i = 0; i < SIZE; i++) {
             if (SIZE == checkRow(i, simbol)) flagWin = true;
         }
